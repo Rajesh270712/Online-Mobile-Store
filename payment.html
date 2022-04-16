@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #pay{
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 15px;
+        width: 300px;
+        margin: auto;
+        font-size: large;
+    }
+    input{
+        margin: 5px;
+    }
+    #link{
+        display: flex;
+        justify-content: space-evenly;
+    }
+</style>
+<body>
+
+    <div id="link">
+        <a href="./products.html">Home</a>
+        <a href="./cart.html">My Cart</a>
+        <a href="./checkout.html">Checkout</a>
+       </div>
+    <h1>Enter Card Details</h1>
+
+    <form id="pay" action="">
+        <label for="">Your Name</label>
+        <input type="text" placeholder="Your name">
+    <br>
+        <label for="">Card Number</label>
+        <input type="number" placeholder="Card Number">
+        <br>
+        <label for=""> Expiry</label>
+        <input type="number" placeholder="MM/YY">
+        <br>
+        <label for="">CVV</label>
+        <input type="number" placeholder="CVV">
+        <br>
+        <input  type="submit" value="Pay">
+    </form>
+</body>
+<script>
+    document.querySelector("#pay").addEventListener("submit",function(){
+        event.preventDefault();
+        alert("Your order is successfully placed")
+        window.location.href="products.html"
+    })
+
+
+</script>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+</head>
+<style>
+    h1{
+        text-align: center;
+    }
+    body{
+        padding: 5px 70px;
+    }
+    #container{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        height: auto;
+        gap: 20px;
+        margin-top: 15px;
+    }
+    #container>div{
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    #cartInfo{
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 15px;
+        width: 300px;
+        margin: auto;
+    }
+    #link{
+        display: flex;
+        justify-content: space-evenly;
+    }
+</style>
+<body>
+    <div id="link">
+        <a href="./products.html">Home</a>
+        <a href="./cart.html">My Cart</a>
+        <a href="./checkout.html">Checkout</a>
+       </div>
+
+    <h1>
+        My Cart
+    </h1>
+
+    <div id="cartInfo">
+        <label for="">Total Products <p id="number"></p></label>
+        <label for="">Total Price <p id="price"></p></label>
+
+        <label for="">Coupen Code <input type="text" id="code"> <button id="codeBut">Apply Code</button></label>
+    </div>
+
+    <div id="container"></div>
+</body>
+<script>
+
+    var cartItem=JSON.parse(localStorage.getItem("cartItem"));
+    showData(cartItem)
+    function showData(Ndata){
+        Ndata.forEach(item=>{
+            var box=document.createElement("div");
+    
+            var image=document.createElement("img");
+            image.setAttribute("src",item.image_url)
+    
+            var name=document.createElement("h3");
+            name.innerText=item.name
+    
+            var price=document.createElement("h4");
+            price.innerText=item.price
+    
+            var rating=document.createElement("h4");
+            rating.innerText=item.rating
+    
+            
+    
+            box.append(image,name,price,rating);
+    
+            document.querySelector("#container").append(box)
+        })
+
+    }
+
+
+
+    // info
+
+    document.querySelector("#number").innerText=cartItem.length;
+
+
+
+    totalPrice=cartItem.reduce((sum,curr)=>{
+        return sum+=curr.price
+    },0)
+
+    document.querySelector("#codeBut").addEventListener("click",function(){
+        event.preventDefault();
+        var code=document.querySelector("#code").value
+        if(code=="masai30")
+        {
+            totalPrice=totalPrice-totalPrice*0.3
+            // console.log(totalPrice)
+        }
+        else
+        {
+            alert("Invalid Code!")
+        }
+        document.querySelector("#price").innerText="Rs."+Math.floor(totalPrice);
+        localStorage.setItem("totPrice",Math.floor(totalPrice))
+    });
+    document.querySelector("#price").innerText="Rs."+totalPrice;
+    localStorage.setItem("totPrice",(totalPrice))
+    
+</script>
+</html>

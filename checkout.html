@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+      #cartInfo{
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 15px;
+        width: 300px;
+        margin: auto;
+        font-size: large;
+    }
+    #link{
+        display: flex;
+        justify-content: space-evenly;
+    }
+</style>
+<body>
+    <div id="link">
+        <a href="./products.html">Home</a>
+        <a href="./cart.html">My Cart</a>
+        <a href="./checkout.html">Checkout</a>
+       </div>
+    
+    <div id="cartInfo">
+        <label for="">Total Products <p id="number"></p></label>
+        <label for="">Total Price <p id="price"></p></label>
+        <input type="text" placeholder="Enter your Address" id="add" >
+        <button id="address">Save Address</button>
+    </div>
+</body>
+<script>
+    var cartItem=JSON.parse(localStorage.getItem("cartItem"));
+    document.querySelector("#number").innerText=cartItem.length;
+    document.querySelector("#price").innerText=+(localStorage.getItem("totPrice"))
+
+    document.querySelector("#address").addEventListener("click",function(){
+        event.preventDefault();
+        localStorage.setItem("address",document.querySelector("#add").value)
+        alert("Address added")
+        window.location.href="payment.html"
+    })
+</script>
+</html>
